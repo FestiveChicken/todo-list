@@ -1,5 +1,8 @@
 import { createTodo } from "./createTodo";
-import { createProject } from "./createProject";
+import { newProjectButton } from "./DOM";
+import { deleteProjectButton } from "./DOM";
+import './style.css';
 
-console.log(new createTodo('title', 'test', '911', 'test', 'test', false))
-console.log(new createProject('my penis'))
+new createTodo('title', 'test', 'example date', 'test', 'test', false)
+newProjectButton('click')
+deleteProjectButton('click')

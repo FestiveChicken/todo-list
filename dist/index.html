@@ -7,7 +7,20 @@
 </head>
 <body>
     <div id="content">
-        <button>New Project <img src="" alt="Plus sign"> </button>
+        <div id="projects">
+            <dialog id="projectDialog">
+                <form id="projectForm">
+                    <label for="projectName">Enter a name for the project: </label>
+                    <input type="text" id="projectName" name="projectName">
+                    <button value="cancel" formmethod="dialog">Cancel</button>
+                    <button id='projectConfirmButton' type="submit">Confirm</button>
+                </form>
+              </dialog>
+            <button id="projectButton">New Project <img src="" alt="Plus sign"> </button>
+        </div>
+        <div id="todo">
+            <button id="todoButton">New Task <img src="" alt="Plus sign"> </button>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>

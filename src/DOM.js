@@ -3,20 +3,30 @@ import { createTodo } from "./createTodo"
 
 //add logic to display todo items per project
 
-const content = document.getElementById('content')
-
 //Creates a new project card
 const newProjectCard = (title) => {
-    const projectCard = document.createElement('div')
+    const projects = document.getElementById('projects')
+    const projectCard = document.createElement('button')
+    const projectEdit = document.createElement('button')
+    const projectDelete = document.createElement('button')
     const heading = document.createElement('h1')
+
     projectCard.setAttribute('id', title)
-    content.appendChild(projectCard)
     heading.textContent = title
+    projectEdit.textContent = 'Edit'
+    projectEdit.setAttribute('class', 'edit')
+    projectDelete.textContent = 'Delete'
+    projectDelete.setAttribute('class', 'delete')
+    
+    projects.appendChild(projectCard)
     projectCard.appendChild(heading)
+    projectCard.appendChild(projectEdit)
+    projectCard.appendChild(projectDelete)
 }
 
 //Creates a new todo card
 const newTodoCard = (name, dueDate) => {
+    const todo = document.getElementById('todo')
     const todoCard = document.createElement('div')
     const todoName = document.createElement ('p')
     const todoDate = document.createElement('p')
@@ -26,16 +36,40 @@ const newTodoCard = (name, dueDate) => {
     todoName.textContent = name
     todoDate.textContent = dueDate
 
-    content.appendChild(todoCard)
+    todo.appendChild(todoCard)
     todoCard.appendChild(todoName)
     todoCard.appendChild(todoDate)
 }
 
-const newProjectButton = () => {
-    //const 
+//New Project Button
+const newProjectButton = (eventType) => {
+    const projectButton = document.getElementById('projectButton') 
+    const projectDialog = document.getElementById('projectDialog')
+    const projectConfirmButton = document.getElementById('projectConfirmButton')
+    const projectForm = document.getElementById('projectForm')
+
+    projectButton.addEventListener(eventType, () => {
+        projectForm.reset()
+        projectDialog.showModal()
+    })
+
+    projectConfirmButton.addEventListener(eventType, (e) => {
+        e.preventDefault()
+        let projectName = document.getElementById('projectName').value
+        new createProject(projectName)
+        projectForm.reset()
+        projectDialog.close()
+    })
+}
+
+//Deletes Project
+const deleteProject = () => {
+    console.log('did this work')
 }
 
 export {
     newProjectCard,
-    newTodoCard
+    newTodoCard,
+    newProjectButton,
+    deleteProject
 }
