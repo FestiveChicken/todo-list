@@ -1,3 +1,9 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
 #content {
     background-color: rgba(0, 0, 0, 0.26);
     height: 500px;
@@ -8,8 +14,29 @@
 
 #projects {
     background-color: aqua;
+    margin: 20px;
 }
 
 #todo {
     background-color: blueviolet;
+    margin: 20px;
+}
+
+#background {
+    overflow: hidden;
+    position: absolute;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#holder {
+    background-color: white;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
 }
