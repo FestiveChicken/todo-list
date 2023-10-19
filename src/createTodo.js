@@ -3,13 +3,12 @@ import { newTodoCard } from "./DOM"
 //Add select project logic
 
 class createTodo {
-    constructor(title, description, dueDate, priority, notes, checklist) {
+    constructor(title, description, dueDate, priority, notes) {
         this.title = title
         this.description = description
         this.dueDate = dueDate
         this.priority = priority
         this.notes = notes
-        checklist = false
         newTodoCard(title, dueDate)
     }
 }

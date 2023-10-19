@@ -40,3 +40,8 @@ body, html {
     border: 3px solid green;
     padding: 10px;
 }
+
+.todoCard {
+    display: flex;
+    justify-content: space-between;
+}

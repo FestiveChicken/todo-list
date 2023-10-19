@@ -3,16 +3,16 @@ import { createTodo } from "./createTodo"
 import './style.css';
 
 //Creates a new project card
-const newProjectCard = (title) => {
+const newProjectCard = (name) => {
     const projects = document.getElementById('projects')
     const projectCard = document.createElement('button')
     const projectEdit = document.createElement('button')
     const projectDelete = document.createElement('button')
     const heading = document.createElement('h1')
 
-    projectCard.setAttribute('id', title)
-    heading.setAttribute('id', title+'-heading')
-    heading.textContent = title
+    projectCard.setAttribute('id', name)
+    heading.setAttribute('id', name+'-heading')
+    heading.textContent = name
     projectEdit.textContent = 'Edit'
     projectEdit.setAttribute('class', 'edit')
     projectDelete.textContent = 'Delete'
@@ -25,23 +25,6 @@ const newProjectCard = (title) => {
 
     projectEdit.addEventListener('click', editProject)
     projectDelete.addEventListener('click', deleteProject)
-}
-
-//Creates a new todo card
-const newTodoCard = (name, dueDate) => {
-    const todo = document.getElementById('todo')
-    const todoCard = document.createElement('div')
-    const todoName = document.createElement ('p')
-    const todoDate = document.createElement('p')
-
-    todoName.setAttribute('class', name)
-    todoDate.setAttribute('class', dueDate)
-    todoName.textContent = name
-    todoDate.textContent = dueDate
-
-    todo.appendChild(todoCard)
-    todoCard.appendChild(todoName)
-    todoCard.appendChild(todoDate)
 }
 
 //New project button
@@ -76,11 +59,11 @@ const deleteProject = (e) => {
 
 }
 
-
 //Edit project name
 const editProject = (e) => {
     e = e.target
 
+    //Creating input box
     const content = document.getElementById('content')
     const background = document.createElement('div')
     const holder = document.createElement('div')
@@ -103,6 +86,7 @@ const editProject = (e) => {
     holder.appendChild(confirmButton)
     holder.appendChild(cancelButton)
 
+    //Changes project name if clicked
     confirmButton.addEventListener('click', () => {
         if (e.nodeName === 'BUTTON') {
             const heading = document.getElementById(e.parentNode.id+'-heading')
@@ -110,21 +94,67 @@ const editProject = (e) => {
             content.removeChild(background)
         }
     })
+
+    //Ignores changes
     cancelButton.addEventListener('click', () => {
         content.removeChild(background)
     })
     
     
 }
+//Creates a new todo card
+const newTodoCard = (name, dueDate) => {
+    const todo = document.getElementById('todo')
+    const todoCard = document.createElement('div')
+    const todoName = document.createElement ('p')
+    const todoDate = document.createElement('p')
+    const checkbox = document.createElement('input')
 
-//Prompts user for input
-//Seperate for ease of editing code
-const editProjectInput = () => {
+    todoCard.setAttribute('class', 'todoCard')
+    todoName.setAttribute('class', name)
+    todoDate.setAttribute('class', dueDate)
+    todoName.textContent = name
+    todoDate.textContent = dueDate
+    checkbox.type = 'checkbox'
 
-    }
+    todoName.style.margin = '10px'
+    todoDate.style.margin = '10px'
+    checkbox.style.margin = '10px'
+
+    todo.appendChild(todoCard)
+    todoCard.appendChild(todoName)
+    todoCard.appendChild(todoDate)
+    todoCard.appendChild(checkbox)
+}
+
+//New todo button
+const newTodoButton = (eventType) => {
+    const todoButton = document.getElementById('todoButton') 
+    const todoDialog = document.getElementById('todoDialog')
+    const todoConfirmButton = document.getElementById('todoConfirmButton')
+    const todoForm = document.getElementById('todoForm')
+
+    todoButton.addEventListener(eventType, () => {
+        todoForm.reset()
+        todoDialog.showModal()
+    })
+
+    todoConfirmButton.addEventListener(eventType, (e) => {
+        e.preventDefault()
+        let todoName = document.getElementById('todoName').value
+        let todoDescription = document.getElementById('todoDescription').value
+        let todoDueDate = document.getElementById('todoDueDate').value
+        let todoPriority = document.getElementById('todoPriority').value
+        let todoNotes = document.getElementById('todoNotes').value
+        new createTodo(todoName, todoDescription, todoDueDate, todoPriority, todoNotes)
+        todoForm.reset()
+        todoDialog.close()
+    })
+}
 
 export {
     newProjectCard,
     newTodoCard,
     newProjectButton,
+    newTodoButton
 }
