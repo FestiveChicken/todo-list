@@ -56,7 +56,6 @@ const deleteProject = (e) => {
         const parent = document.getElementById(e.parentNode.id)
         projects.removeChild(parent)
     }
-
 }
 
 //Edit project name
@@ -90,7 +89,10 @@ const editProject = (e) => {
     confirmButton.addEventListener('click', () => {
         if (e.nodeName === 'BUTTON') {
             const heading = document.getElementById(e.parentNode.id+'-heading')
+            const project = document.getElementById(e.parentNode.id)
             heading.innerText = inputText.value
+            project.removeAttribute('id')
+            project.setAttribute('id', inputText.value)
             content.removeChild(background)
         }
     })
@@ -99,9 +101,13 @@ const editProject = (e) => {
     cancelButton.addEventListener('click', () => {
         content.removeChild(background)
     })
-    
+}
+
+//Finds project for todo list
+const findProject = () => {
     
 }
+
 //Creates a new todo card
 const newTodoCard = (name, dueDate) => {
     const todo = document.getElementById('todo')
@@ -218,13 +224,7 @@ const editTodo = (e) => {
 
 //Clears todo list
 //NEEDS EDIT
-const clearTodo = (eventType) => {
-    const todoCards = document.querySelectorAll('.todoCard')
-    const todo = document.getElementById('todo')
-    test.addEventListener(eventType, () => {
-        todo.removeChild(todoCards[0])
-    })
-        
+const clearTodo = () => {
 }
 
 //NEEDS EDIT
