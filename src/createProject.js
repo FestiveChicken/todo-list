@@ -1,8 +1,8 @@
 import { newProjectCard } from "./DOM"
 
 class createProject {
-    constructor (name, todoArray) {
-        todoArray = new Array 
+    constructor (name, todoArray = []) {
+        this.todoArray = todoArray
         this.name = name
         newProjectCard(name)
     }

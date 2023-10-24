@@ -109,13 +109,19 @@ const newTodoCard = (name, dueDate) => {
     const todoName = document.createElement ('p')
     const todoDate = document.createElement('p')
     const checkbox = document.createElement('input')
+    const todoEdit = document.createElement('button')
+    const todoDelete = document.createElement('button')
 
+    todoCard.setAttribute('id', name)
     todoCard.setAttribute('class', 'todoCard')
-    todoName.setAttribute('class', name)
     todoDate.setAttribute('class', dueDate)
     todoName.textContent = name
     todoDate.textContent = dueDate
     checkbox.type = 'checkbox'
+    todoEdit.textContent = 'Edit'
+    todoEdit.setAttribute('class', 'edit')
+    todoDelete.textContent = 'Delete'
+    todoDelete.setAttribute('class', 'delete')
 
     todoName.style.margin = '10px'
     todoDate.style.margin = '10px'
@@ -124,7 +130,12 @@ const newTodoCard = (name, dueDate) => {
     todo.appendChild(todoCard)
     todoCard.appendChild(todoName)
     todoCard.appendChild(todoDate)
+    todoCard.appendChild(todoEdit)
+    todoCard.appendChild(todoDelete)
     todoCard.appendChild(checkbox)
+
+    todoEdit.addEventListener('click', editTodo)
+    todoDelete.addEventListener('click', deleteTodo)
 }
 
 //New todo button
@@ -152,9 +163,96 @@ const newTodoButton = (eventType) => {
     })
 }
 
+//Deletes todo
+const deleteTodo = (e) => {
+    e = e.target
+    if (e.nodeName === 'BUTTON') {
+        const todo = document.getElementById('todo')
+        const parent = document.getElementById(e.parentNode.id)
+        todo.removeChild(parent)
+    }
+
+}
+
+//NEEDS EDIT
+const editTodo = (e) => {
+    e = e.target
+
+    //Creating input box
+    const content = document.getElementById('content')
+    const background = document.createElement('div')
+    const holder = document.createElement('div')
+    const newName = document.createElement('h3')
+    const inputText = document.createElement('input')
+    const confirmButton = document.createElement('button')
+    const cancelButton = document.createElement('button')
+
+    background.setAttribute('id', 'background')
+    holder.setAttribute('id', 'holder')
+    newName.innerText = 'New Todo Name?'
+    inputText.type = 'text'
+    confirmButton.innerText = 'Confirm'
+    cancelButton.innerText = 'Cancel'
+
+    content.appendChild(background)
+    background.appendChild(holder)
+    holder.appendChild(newName)
+    holder.appendChild(inputText)
+    holder.appendChild(confirmButton)
+    holder.appendChild(cancelButton)
+
+    //Changes project name if clicked
+    confirmButton.addEventListener('click', () => {
+        if (e.nodeName === 'BUTTON') {
+            const heading = document.getElementById(e.parentNode.id)
+            heading.innerText = inputText.value
+            content.removeChild(background)
+        }
+    })
+
+    //Ignores changes
+    cancelButton.addEventListener('click', () => {
+        content.removeChild(background)
+    })
+}
+
+//Clears todo list
+//NEEDS EDIT
+const clearTodo = (eventType) => {
+    const todoCards = document.querySelectorAll('.todoCard')
+    const todo = document.getElementById('todo')
+    test.addEventListener(eventType, () => {
+        todo.removeChild(todoCards[0])
+    })
+        
+}
+
+//NEEDS EDIT
+//Load project and todo items 
+const loadProject = () => {
+    const projectButton = document.getElementById('projectButton') 
+    const projectDialog = document.getElementById('projectDialog')
+    const projectConfirmButton = document.getElementById('projectConfirmButton')
+    const projectForm = document.getElementById('projectForm')
+
+    projectButton.addEventListener(eventType, () => {
+        projectForm.reset()
+        projectDialog.showModal()
+    })
+
+    projectConfirmButton.addEventListener(eventType, (e) => {
+        e.preventDefault()
+        let projectName = document.getElementById('projectName').value
+        new createProject(projectName)
+        projectForm.reset()
+        projectDialog.close()
+    })
+}
+
 export {
     newProjectCard,
     newTodoCard,
     newProjectButton,
-    newTodoButton
+    newTodoButton,
+    clearTodo
 }
