@@ -4,13 +4,14 @@ import './style.css';
 
 //Creates a new project card
 const newProjectCard = (name) => {
-    const projects = document.getElementById('projects')
+    const projectList = document.getElementById('projectList')
     const projectCard = document.createElement('button')
     const projectEdit = document.createElement('button')
     const projectDelete = document.createElement('button')
     const heading = document.createElement('h1')
 
     projectCard.setAttribute('id', name)
+    projectCard.setAttribute('class', 'projectItem')
     heading.setAttribute('id', name+'-heading')
     heading.textContent = name
     projectEdit.textContent = 'Edit'
@@ -18,13 +19,14 @@ const newProjectCard = (name) => {
     projectDelete.textContent = 'Delete'
     projectDelete.setAttribute('class', 'delete')
     
-    projects.appendChild(projectCard)
+    projectList.appendChild(projectCard)
     projectCard.appendChild(heading)
     projectCard.appendChild(projectEdit)
     projectCard.appendChild(projectDelete)
 
     projectEdit.addEventListener('click', editProject)
     projectDelete.addEventListener('click', deleteProject)
+    projectCard.addEventListener('click', getProjectID)
 }
 
 //New project button
@@ -43,6 +45,7 @@ const newProjectButton = (eventType) => {
         e.preventDefault()
         let projectName = document.getElementById('projectName').value
         new createProject(projectName)
+        checkEmptyProjectList()
         projectForm.reset()
         projectDialog.close()
     })
@@ -52,9 +55,10 @@ const newProjectButton = (eventType) => {
 const deleteProject = (e) => {
     e = e.target
     if (e.nodeName === 'BUTTON') {
-        const projects = document.getElementById('projects')
+        const projectList = document.getElementById('projectList')
         const parent = document.getElementById(e.parentNode.id)
-        projects.removeChild(parent)
+        projectList.removeChild(parent)
+        checkEmptyProjectList()
     }
 }
 
@@ -89,10 +93,10 @@ const editProject = (e) => {
     confirmButton.addEventListener('click', () => {
         if (e.nodeName === 'BUTTON') {
             const heading = document.getElementById(e.parentNode.id+'-heading')
-            const project = document.getElementById(e.parentNode.id)
+            const projectList = document.getElementById(e.parentNode.id)
             heading.innerText = inputText.value
-            project.removeAttribute('id')
-            project.setAttribute('id', inputText.value)
+            projectList.removeAttribute('id')
+            projectList.setAttribute('id', inputText.value)
             content.removeChild(background)
         }
     })
@@ -101,11 +105,6 @@ const editProject = (e) => {
     cancelButton.addEventListener('click', () => {
         content.removeChild(background)
     })
-}
-
-//Finds project for todo list
-const findProject = () => {
-    
 }
 
 //Creates a new todo card
@@ -227,32 +226,60 @@ const editTodo = (e) => {
 const clearTodo = () => {
 }
 
-//NEEDS EDIT
-//Load project and todo items 
-const loadProject = () => {
-    const projectButton = document.getElementById('projectButton') 
-    const projectDialog = document.getElementById('projectDialog')
-    const projectConfirmButton = document.getElementById('projectConfirmButton')
-    const projectForm = document.getElementById('projectForm')
 
-    projectButton.addEventListener(eventType, () => {
-        projectForm.reset()
-        projectDialog.showModal()
-    })
-
-    projectConfirmButton.addEventListener(eventType, (e) => {
-        e.preventDefault()
-        let projectName = document.getElementById('projectName').value
-        new createProject(projectName)
-        projectForm.reset()
-        projectDialog.close()
-    })
+//Checks if project list is empty
+const checkEmptyProjectList = () => {
+    const projectList = document.getElementById('projectList')
+    const todo = document.getElementById("todo")
+    const p = document.createElement("p")
+    p.setAttribute('id', "pleaseCreateProject")
+    const createTodoButton = document.createElement('button')
+    createTodoButton.setAttribute('id', 'createTodoButton')
+    
+    //If there is no project it will remove the create todo button and ask you to create a project
+    if (projectList.innerHTML == "") {
+        p.innerText = "Please create a project to add items on your todo list"
+        todo.appendChild(p)
+        if (document.getElementById('createTodoButton') == null) {
+            return
+        }
+        else {
+            todo.removeChild(document.getElementById('createTodoButton'))
+        }
+    }
+    //Creates todo button and removes initial text
+    else {
+        if (document.getElementById('pleaseCreateProject') == null) {
+            return
+        }
+        else {
+            todo.removeChild(document.getElementById('pleaseCreateProject'))
+            todo.appendChild(createTodoButton)}
+    }
 }
 
+//Adds an event listener to each project
+const getProjectID = (e) => {
+    e = e.target
+    console.log(e.id)
+}
+
+//Sets active status to project that is clicked
+const switchProject = (projectID) => {
+    const projectItems = document.querySelectorAll('.projectItem');
+    projectItems.forEach(item => {
+        item.classList.remove('active');
+    });
+    const selectedProject = document.getElementById(projectID);
+    selectedProject.classList.add('active');
+}
 export {
     newProjectCard,
     newTodoCard,
     newProjectButton,
     newTodoButton,
-    clearTodo
+    clearTodo,
+    checkEmptyProjectList,
+    getProjectID,
+    switchProject
 }
