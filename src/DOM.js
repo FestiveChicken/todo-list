@@ -144,18 +144,18 @@ const newTodoCard = (name, dueDate) => {
 }
 
 //New todo button
-const newTodoButton = (eventType) => {
+const newTodoButton = () => {
     const todoButton = document.getElementById('todoButton') 
     const todoDialog = document.getElementById('todoDialog')
     const todoConfirmButton = document.getElementById('todoConfirmButton')
     const todoForm = document.getElementById('todoForm')
 
-    todoButton.addEventListener(eventType, () => {
+    todoButton.addEventListener('click', () => {
         todoForm.reset()
         todoDialog.showModal()
     })
 
-    todoConfirmButton.addEventListener(eventType, (e) => {
+    todoConfirmButton.addEventListener('click', (e) => {
         e.preventDefault()
         let todoName = document.getElementById('todoName').value
         let todoDescription = document.getElementById('todoDescription').value
@@ -187,22 +187,60 @@ const editTodo = (e) => {
     const content = document.getElementById('content')
     const background = document.createElement('div')
     const holder = document.createElement('div')
+
     const newName = document.createElement('h3')
-    const inputText = document.createElement('input')
+    const nameInput = document.createElement('input')
+    const newDescription = document.createElement('h3')
+    const descriptionInput = document.createElement('input')
+    const newDueDate = document.createElement('h3')
+    const dueDateInput = document.createElement('input')
+    const newPriority = document.createElement('h3')
+    const priorityInput = document.createElement('select')
+    const priorityArray = ['low', 'medium', 'high']
+    const newNotes = document.createElement('h3')
+    const notesInput = document.createElement('input')
+
     const confirmButton = document.createElement('button')
     const cancelButton = document.createElement('button')
 
     background.setAttribute('id', 'background')
     holder.setAttribute('id', 'holder')
+
     newName.innerText = 'New Todo Name?'
-    inputText.type = 'text'
+    nameInput.type = 'text'
+    newDescription.innerText = 'Change Description?'
+    descriptionInput.type = 'text'
+    newDueDate.innerText = 'Change Date?'
+    dueDateInput.type = 'date'
+    newPriority.innerText = 'Change Priority?'
+    newNotes.innerText = 'Change Notes?'
+    notesInput.type = 'text'
+
     confirmButton.innerText = 'Confirm'
     cancelButton.innerText = 'Cancel'
 
     content.appendChild(background)
     background.appendChild(holder)
+
     holder.appendChild(newName)
-    holder.appendChild(inputText)
+    holder.appendChild(nameInput)
+    holder.appendChild(newDescription)
+    holder.appendChild(descriptionInput)
+    holder.appendChild(newDueDate)
+    holder.appendChild(dueDateInput)
+    holder.appendChild(newPriority)
+    holder.appendChild(priorityInput)
+    //Appends all the options for for selection
+    for (let i = 0; i < priorityArray.length; i++) {
+        const priorityOption = document.createElement("option");
+        priorityOption.value = priorityArray[i];
+        priorityOption.text = priorityArray[i];
+        priorityInput.appendChild(priorityOption);
+    }
+    holder.appendChild(newNotes)
+    holder.appendChild(notesInput)
+
+
     holder.appendChild(confirmButton)
     holder.appendChild(cancelButton)
 
@@ -210,12 +248,12 @@ const editTodo = (e) => {
     confirmButton.addEventListener('click', () => {
         if (e.nodeName === 'BUTTON') {
             const heading = document.getElementById(e.parentNode.id)
-            heading.innerText = inputText.value
+            heading.innerText = nameText.value
             content.removeChild(background)
         }
     })
 
-    //Ignores changes
+    //Cancel button
     cancelButton.addEventListener('click', () => {
         content.removeChild(background)
     })
@@ -224,17 +262,24 @@ const editTodo = (e) => {
 //Clears todo list
 //NEEDS EDIT
 const clearTodo = () => {
-}
 
+}
 
 //Checks if project list is empty
 const checkEmptyProjectList = () => {
     const projectList = document.getElementById('projectList')
     const todo = document.getElementById("todo")
+
     const p = document.createElement("p")
     p.setAttribute('id', "pleaseCreateProject")
+
     const createTodoButton = document.createElement('button')
-    createTodoButton.setAttribute('id', 'createTodoButton')
+    createTodoButton.setAttribute('id', 'todoButton')
+    createTodoButton.innerText = 'New todo item'
+    
+    const plusImage = document.createElement('img')
+    plusImage.src = ''
+    plusImage.alt = 'Plus Sign'
     
     //If there is no project it will remove the create todo button and ask you to create a project
     if (projectList.innerHTML == "") {
@@ -254,17 +299,34 @@ const checkEmptyProjectList = () => {
         }
         else {
             todo.removeChild(document.getElementById('pleaseCreateProject'))
-            todo.appendChild(createTodoButton)}
+            todo.appendChild(createTodoButton)
+            createTodoButton.appendChild(plusImage)
+            newTodoButton()
+        }
     }
 }
 
-//Adds an event listener to each project
+//Returns ID of project
 const getProjectID = (e) => {
+    const projectItem = document.querySelector('.projectItem')
+    const editButton = document.querySelector('.edit')
+    const deleteButton = document.querySelector('.delete')
     e = e.target
-    console.log(e.id)
+    if (projectItem !== e) {
+        if (editButton == e) {
+            return
+        }
+        else if (deleteButton == e) {
+            return
+        }
+        switchProject(e.parentNode.id)
+        return
+    }
+    switchProject(e.id)
+    return 
 }
 
-//Sets active status to project that is clicked
+//Sets active class to project that is clicked
 const switchProject = (projectID) => {
     const projectItems = document.querySelectorAll('.projectItem');
     projectItems.forEach(item => {
@@ -273,6 +335,8 @@ const switchProject = (projectID) => {
     const selectedProject = document.getElementById(projectID);
     selectedProject.classList.add('active');
 }
+
+
 export {
     newProjectCard,
     newTodoCard,

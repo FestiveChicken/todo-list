@@ -4,5 +4,4 @@ import './style.css';
 
 checkEmptyProjectList()
 newProjectButton('click')
-//newTodoButton('click')
 //clearTodo('click')
