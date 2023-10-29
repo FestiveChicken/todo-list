@@ -1,5 +1,5 @@
 import { newTodoCard } from "./DOM"
-
+import { createProject } from "./createProject"
 //Add select project logic
 
 class createTodo {
@@ -10,6 +10,7 @@ class createTodo {
         this.priority = priority
         this.notes = notes
         newTodoCard(title, dueDate)
+
     }
 }
 
