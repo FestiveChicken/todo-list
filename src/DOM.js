@@ -43,13 +43,32 @@ const newProjectButton = (eventType) => {
 
     projectConfirmButton.addEventListener(eventType, (e) => {
         e.preventDefault()
-        let projectName = document.getElementById('projectName').value
-        new createProject(projectName)
         checkEmptyProjectList()
+        assignConstantToProject()
         projectForm.reset()
         projectDialog.close()
     })
 }
+
+//Assigns a name and number to each project to allow acces to change constructor
+const assignConstantToProject = (() => {
+    let projectNumber = []; // Initialize projectNumber inside the closure
+    return () => {
+    let projectName = document.getElementById('projectName').value;
+    projectNumber[projectNumberCounter()] = new createProject(projectName);
+    console.log(projectNumber)
+    return projectNumber;
+};
+})();
+
+//counter for project number
+const projectNumberCounter = (() => {
+    let counter = -1
+    return () => {
+        counter++
+        return counter
+    };
+})();
 
 //Deletes project
 const deleteProject = (e) => {
