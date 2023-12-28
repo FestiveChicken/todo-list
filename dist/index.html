@@ -1,48 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
+    <meta charset="utf-8">
     <title>Todo List</title>
-</head>
-<body>
-
-    <div id="content">
-        <div id="projects">
-            <dialog id="projectDialog">
-                <form id="projectForm">
-                    <label for="projectName">Enter a name for the project: </label>
-                    <input type="text" id="projectName" name="projectName">
-                    <button value="cancel" formmethod="dialog">Cancel</button>
-                    <button id='projectConfirmButton' type="submit">Confirm</button>
-                </form>
-            </dialog>
-            <button id="projectButton">New Project <img src="" alt="Plus sign"></button>
-            <div id="projectList"></div>
-        </div>
-        <div id="todo">
-            <dialog id="todoDialog">
-                <form id="todoForm">
-                    <label for="todoName">Task name: </label>
-                    <input type="text" id="todoName" name="todoName">
-                    <label for="todoDescription">Brief Description: </label>
-                    <input type="text" id="todoDescription" name="todoDescription">
-                    <label for="todoDueDate">Due Date: </label>
-                    <input type="date" id="todoDueDate" name="todoDueDate">
-                    <label for="todoPriority">Priority: </label>
-                    <select name="todoPriority" id="todoPriority">
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                    </select>
-                    <label for="todoNotes">Notes: </label>
-                    <input type="text" id="todoNotes" name="todoNotes">
-                    <button value="cancel" formmethod="dialog">Cancel</button>
-                    <button id='todoConfirmButton' type="submit">Confirm</button>
-                </form>
-            </dialog>
-        </div>
-    </div>
-    <script src="main.js"></script>
-</body>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="index.bundle.js"></script><script defer src="main.bundle.js"></script></head>
+  <body>
+  </body>
 </html>
