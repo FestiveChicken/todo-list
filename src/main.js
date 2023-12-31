@@ -1,4 +1,4 @@
-import { flatMap } from "lodash";
+import { create, flatMap } from "lodash";
 import { createTodo } from "./createTodo";
 
 import { createProject } from "./createProject"
@@ -45,32 +45,13 @@ const newProjectButton = (eventType) => {
 
     projectConfirmButton.addEventListener(eventType, (e) => {
         e.preventDefault()
-        assignConstantToProject()
+        const projectValue = document.getElementById('projectName').value
+        new createProject(projectValue)
         projectForm.reset()
         projectDialog.close()
         checkEmptyProjectList()
     })
 }
-
-//Assigns a name and number to each project to allow acces to change constructor
-const assignConstantToProject = (() => {
-    let projectNumber = []; // Initialize projectNumber inside the closure
-    return () => {
-    let projectName = document.getElementById('projectName').value;
-    projectNumber[projectNumberCounter()] = new createProject(projectName);
-    console.log(projectNumber)
-    return projectNumber;
-};
-})();
-
-//counter for project number
-const projectNumberCounter = (() => {
-    let counter = -1
-    return () => {
-        counter++
-        return counter
-    };
-})();
 
 //Deletes project
 const deleteProject = (e) => {
@@ -130,6 +111,9 @@ const editProject = (e) => {
 
 //Creates a new todo card
 const newTodoCard = (name, dueDate) => {
+
+
+
     const todo = document.getElementById('todo')
     const todoCard = document.createElement('div')
     const todoName = document.createElement ('p')
@@ -166,6 +150,7 @@ const newTodoCard = (name, dueDate) => {
 
 //New todo button
 const newTodoButton = () => {
+    const activeProject = checkActiveProject()
     const todoButton = document.getElementById('todoButton') 
     const todoDialog = document.getElementById('todoDialog')
     const todoConfirmButton = document.getElementById('todoConfirmButton')
@@ -178,12 +163,13 @@ const newTodoButton = () => {
 
     todoConfirmButton.addEventListener('click', (e) => {
         e.preventDefault()
-        let todoName = document.getElementById('todoName').value
-        let todoDescription = document.getElementById('todoDescription').value
-        let todoDueDate = document.getElementById('todoDueDate').value
-        let todoPriority = document.getElementById('todoPriority').value
-        let todoNotes = document.getElementById('todoNotes').value
-        new createTodo(todoName, todoDescription, todoDueDate, todoPriority, todoNotes)
+        const todoName = document.getElementById('todoName').value
+        const todoDescription = document.getElementById('todoDescription').value
+        const todoDueDate = document.getElementById('todoDueDate').value
+        const todoPriority = document.getElementById('todoPriority').value
+        const todoNotes = document.getElementById('todoNotes').value
+        const todoItem = new createTodo(todoName, todoDescription, todoDueDate, todoPriority, todoNotes)
+        activeProject.addTodo(todoItem)
         todoForm.reset()
         todoDialog.close()
     })
@@ -306,11 +292,8 @@ const checkEmptyProjectList = () => {
     if (projectList.hasChildNodes() == false) {
         p.innerText = "Please create a project to add items on your todo list"
         todo.appendChild(p)
-        if (document.getElementById('createTodoButton') == null) {
-            return
-        }
-        else {
-            todo.removeChild(document.getElementById('createTodoButton'))
+        if (document.getElementById('todoButton') != null) {
+            todo.removeChild(document.getElementById('todoButton'))
         }
     }
     
@@ -368,6 +351,15 @@ const switchProject = () => {
     })
 }
 
+//Checks for activeProject,, will not create a todo if no active project is found
+const checkActiveProject = () => {
+        let activeProject = document.getElementsByClassName('active')[0]
+    if (activeProject == undefined) {
+        console.log('please select a project first')
+        return
+    }
+    return activeProject.id
+}
 export {
     newProjectCard,
     newTodoCard,

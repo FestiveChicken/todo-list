@@ -9,7 +9,9 @@ class createTodo {
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
-        this.addToActiveProject(); // Call a method to add this todo to the active project
+        //this.addToActiveProject(); // Call a method to add this todo to the active project
+        newTodoCard(title, description, dueDate, priority, notes)
+
     }
 }
 
