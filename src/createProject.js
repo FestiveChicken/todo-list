@@ -1,14 +1,20 @@
-import { newProjectCard } from "./DOM"
+import { newProjectCard } from "./main.js"
+import { createTodo } from "./createTodo.js";
 
 class createProject {
-    constructor (name, todoArray = []) {
-        this.todoArray = todoArray
-        this.name = name
-        newProjectCard(name)
+    constructor(name) {
+        this.name = name;
+        this.todos = [];
+        newProjectCard(name);
     }
-    
+
+    addTodo(todo) {
+        if (todo instanceof createTodo) {
+            this.todos.push(createTodo)
+        }
+    }
 }
 
 export {
-    createProject
+    createProject,
 }

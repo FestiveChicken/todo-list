@@ -1,0 +1,32 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ (() => {
+
+eval("// Create elements\nconst contentDiv = document.createElement('div');\ncontentDiv.id = 'content';\n\nconst projectsDiv = document.createElement('div');\nprojectsDiv.id = 'projects';\n\nconst projectDialog = document.createElement('dialog');\nprojectDialog.id = 'projectDialog';\n\nconst projectForm = document.createElement('form');\nprojectForm.id = 'projectForm';\n\nconst projectNameLabel = document.createElement('label');\nprojectNameLabel.setAttribute('for', 'projectName');\nprojectNameLabel.textContent = 'Enter a name for the project: ';\n\nconst projectNameInput = document.createElement('input');\nprojectNameInput.type = 'text';\nprojectNameInput.id = 'projectName';\nprojectNameInput.name = 'projectName';\n\nconst cancelButton = document.createElement('button');\ncancelButton.value = 'cancel';\ncancelButton.setAttribute('formmethod', 'dialog');\ncancelButton.textContent = 'Cancel';\n\nconst confirmButton = document.createElement('button');\nconfirmButton.id = 'projectConfirmButton';\nconfirmButton.type = 'submit';\nconfirmButton.textContent = 'Confirm';\n\n// Append elements to form and dialog\nprojectForm.appendChild(projectNameLabel);\nprojectForm.appendChild(projectNameInput);\nprojectForm.appendChild(cancelButton);\nprojectForm.appendChild(confirmButton);\nprojectDialog.appendChild(projectForm);\n\nconst newProjectButton = document.createElement('button');\nnewProjectButton.id = 'projectButton';\nnewProjectButton.textContent = 'New Project';\n\nconst plusImg = document.createElement('img');\nplusImg.src = ''; // Add the image source here\nplusImg.alt = 'Plus sign';\nnewProjectButton.appendChild(plusImg);\n\nconst projectListDiv = document.createElement('div');\nprojectListDiv.id = 'projectList';\n\nconst todoDiv = document.createElement('div');\ntodoDiv.id = 'todo';\n\nconst todoDialog = document.createElement('dialog');\ntodoDialog.id = 'todoDialog';\n\n// Create elements for Todo section\nconst todoForm = document.createElement('form');\ntodoForm.id = 'todoForm';\n\nconst todoNameLabel = document.createElement('label');\ntodoNameLabel.setAttribute('for', 'todoName');\ntodoNameLabel.textContent = 'Task name: ';\n\nconst todoNameInput = document.createElement('input');\ntodoNameInput.type = 'text';\ntodoNameInput.id = 'todoName';\ntodoNameInput.name = 'todoName';\n\nconst todoDescriptionLabel = document.createElement('label');\ntodoDescriptionLabel.setAttribute('for', 'todoDescription');\ntodoDescriptionLabel.textContent = 'Brief Description: ';\n\nconst todoDescriptionInput = document.createElement('input');\ntodoDescriptionInput.type = 'text';\ntodoDescriptionInput.id = 'todoDescription';\ntodoDescriptionInput.name = 'todoDescription';\n\nconst todoDueDateLabel = document.createElement('label');\ntodoDueDateLabel.setAttribute('for', 'todoDueDate');\ntodoDueDateLabel.textContent = 'Due Date: ';\n\nconst todoDueDateInput = document.createElement('input');\ntodoDueDateInput.type = 'date';\ntodoDueDateInput.id = 'todoDueDate';\ntodoDueDateInput.name = 'todoDueDate';\n\nconst todoPriorityLabel = document.createElement('label');\ntodoPriorityLabel.setAttribute('for', 'todoPriority');\ntodoPriorityLabel.textContent = 'Priority: ';\n\nconst todoPrioritySelect = document.createElement('select');\ntodoPrioritySelect.id = 'todoPriority';\ntodoPrioritySelect.name = 'todoPriority';\n\nconst priorityOptions = ['Low', 'Medium', 'High'];\n\npriorityOptions.forEach((option) => {\n  const priorityOption = document.createElement('option');\n  priorityOption.value = option;\n  priorityOption.textContent = option;\n  todoPrioritySelect.appendChild(priorityOption);\n});\n\nconst todoNotesLabel = document.createElement('label');\ntodoNotesLabel.setAttribute('for', 'todoNotes');\ntodoNotesLabel.textContent = 'Notes: ';\n\nconst todoNotesInput = document.createElement('input');\ntodoNotesInput.type = 'text';\ntodoNotesInput.id = 'todoNotes';\ntodoNotesInput.name = 'todoNotes';\n\nconst todoCancelButton = document.createElement('button');\ntodoCancelButton.value = 'cancel';\ntodoCancelButton.setAttribute('formmethod', 'dialog');\ntodoCancelButton.textContent = 'Cancel';\n\nconst todoConfirmButton = document.createElement('button');\ntodoConfirmButton.id = 'todoConfirmButton';\ntodoConfirmButton.type = 'submit';\ntodoConfirmButton.textContent = 'Confirm';\n\n// Append elements to form and dialog for Todo\ntodoForm.appendChild(todoNameLabel);\ntodoForm.appendChild(todoNameInput);\ntodoForm.appendChild(todoDescriptionLabel);\ntodoForm.appendChild(todoDescriptionInput);\ntodoForm.appendChild(todoDueDateLabel);\ntodoForm.appendChild(todoDueDateInput);\ntodoForm.appendChild(todoPriorityLabel);\ntodoForm.appendChild(todoPrioritySelect);\ntodoForm.appendChild(todoNotesLabel);\ntodoForm.appendChild(todoNotesInput);\ntodoForm.appendChild(todoCancelButton);\ntodoForm.appendChild(todoConfirmButton);\ntodoDialog.appendChild(todoForm);\n\n// Append elements to respective parents\nprojectsDiv.appendChild(projectDialog);\nprojectsDiv.appendChild(newProjectButton);\nprojectsDiv.appendChild(projectListDiv);\n\ntodoDiv.appendChild(todoDialog);\n\ncontentDiv.appendChild(projectsDiv);\ncontentDiv.appendChild(todoDiv);\n\n// Add the content to the body of the document\ndocument.body.appendChild(contentDiv);\n\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/index.js"]();
+/******/ 	
+/******/ })()
+;
