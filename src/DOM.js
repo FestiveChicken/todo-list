@@ -1,6 +1,6 @@
 import { createProject } from "./createProject"
 import { createTodo } from "./createTodo"
-import './style.css';
+import './styles.css';
 
 //Creates a new project card
 const newProjectCard = (name) => {
@@ -115,8 +115,9 @@ const newTodoCard = (name, dueDate) => {
     todoCard.setAttribute('id', name)
     todoCard.setAttribute('class', 'todoCard')
     todoDate.setAttribute('class', dueDate)
-    todoName.textContent = name
     todoDate.textContent = dueDate
+    todoName.textContent = name
+    todoName.setAttribute('id', name+'Name')
     checkbox.type = 'checkbox'
     todoEdit.textContent = 'Edit'
     todoEdit.setAttribute('class', 'edit')
@@ -174,7 +175,6 @@ const deleteTodo = (e) => {
 
 }
 
-//NEEDS EDIT
 const editTodo = (e) => {
     e = e.target
 
@@ -186,6 +186,8 @@ const editTodo = (e) => {
     const inputText = document.createElement('input')
     const confirmButton = document.createElement('button')
     const cancelButton = document.createElement('button')
+    const todoId = document.getElementById(e.parentNode.id)
+    const todoName = document.getElementById(todoId.id+'Name')
 
     background.setAttribute('id', 'background')
     holder.setAttribute('id', 'holder')
@@ -204,8 +206,7 @@ const editTodo = (e) => {
     //Changes project name if clicked
     confirmButton.addEventListener('click', () => {
         if (e.nodeName === 'BUTTON') {
-            const heading = document.getElementById(e.parentNode.id)
-            heading.innerText = inputText.value
+            todoName.textContent = inputText.value
             content.removeChild(background)
         }
     })
@@ -219,12 +220,10 @@ const editTodo = (e) => {
 //Clears todo list
 //NEEDS EDIT
 const clearTodo = (eventType) => {
-    const todoCards = document.querySelectorAll('.todoCard')
-    const todo = document.getElementById('todo')
+    const todoCards = document.getElementsByClassName('todoCard')
     test.addEventListener(eventType, () => {
         todo.removeChild(todoCards[0])
     })
-        
 }
 
 //NEEDS EDIT

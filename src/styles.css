@@ -1,0 +1,144 @@
+/* General Layout */
+:root {
+    --primary: #4a90e2;
+    --danger: #e74c3c;
+    --success: #2ecc71;
+    --bg: #f4f7f6;
+    --text: #333;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#content {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Sidebar - Projects */
+#projects {
+    background-color: #2c3e50;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#projects h1 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #555;
+}
+
+/* Main Area - Todos */
+#todo {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Buttons Styling */
+button {
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#projectButton, #todoButton {
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+}
+
+/* Dynamic Todo Cards */
+.todoCard {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    border-left: 5px solid var(--primary);
+}
+
+.todoCard p {
+    flex-grow: 1;
+}
+
+.edit { background-color: #f1c40f; color: black; margin: 0 5px; }
+.delete { background-color: var(--danger); color: white; }
+
+/* Dialog Styling */
+dialog {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    padding: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#holder {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+}
+
+#projectButton img, 
+#todoButton img {
+    width: 16px;   /* Adjust this number to your liking */
+    height: 16px;  /* Keep width and height the same for icons */
+    margin-left: 8px; /* Adds some space between the text and the icon */
+    vertical-align: middle; /* Aligns the icon nicely with the button text */
+}
+
+#projectButton, 
+#todoButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
